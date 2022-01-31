@@ -13,10 +13,10 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError(error => {
         console.log("Erro detectado pelo interceptor: ");
         let errorObj = error;
-        if(!errorObj.error){
-          errorObj = errorObj.console.error();
+        if(errorObj.error){
+          errorObj = errorObj.error;
         }
-        if(!errorObj.status){
+        if(!errorObj.status && errorObj){
           errorObj = JSON.parse(errorObj);
         }
 
