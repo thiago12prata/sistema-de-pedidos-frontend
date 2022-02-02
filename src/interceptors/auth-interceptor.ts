@@ -1,12 +1,9 @@
 import { API_CONFIG } from './../config/api.config';
-import { AuthService } from './../services/auth.service';
 import { StorageService } from './../services/storage.service';
-import { LocalUser } from './../models/local_user';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpEvent, HttpRequest, HttpHandler, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { l } from '@angular/core/src/render3';
+
 
 
 @Injectable()
