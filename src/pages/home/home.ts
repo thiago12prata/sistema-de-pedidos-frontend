@@ -44,4 +44,7 @@ export class HomePage {
     },
     error => {});
   }
+  cadastrarUsuario(){
+    this.navCtrl.push('CadastroPage')
+  }
 }
