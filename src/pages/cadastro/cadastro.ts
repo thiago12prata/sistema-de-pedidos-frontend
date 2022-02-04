@@ -1,6 +1,10 @@
+import { CidadeDTO } from './../../models/cidade.dto';
+import { EstadosService } from './../../services/domain/estado.service';
+import { CidadeService } from './../../services/domain/cidade.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup , Validators} from '@angular/forms';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { EstadoDTO } from '../../models/estado.dto';
 
 @IonicPage()
 @Component({
@@ -11,10 +15,15 @@ export class CadastroPage {
 
   formGroup : FormGroup;
 
+  estados: EstadoDTO[];
+  cidades: CidadeDTO[];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public formBuilder: FormBuilder) {
+    public formBuilder: FormBuilder,
+    public cidadeService: CidadeService,
+    public estadoService: EstadosService) {
       this.formGroup = this.formBuilder.group({
         nome: ['Joaquim', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
         email: ['joaquim@gmail.com', [Validators.required, Validators.email]],
@@ -33,7 +42,28 @@ export class CadastroPage {
         cidadeId : [null, [Validators.required]]
       });
   }
+
+  ionViewDidLoad(){
+    this.estadoService.findAll()
+    .subscribe(response => {
+      this.estados = response;
+      this.formGroup.controls.estadoId.setValue(this.estados[0].id)
+      this.atualizarCidades();
+    },
+    error => {})
+  }
+
   cadastrarUsuario(){
     console.log("enviou");
+  }
+
+  atualizarCidades(){
+    let estado_Id = this.formGroup.value.estadoId;
+    this.cidadeService.findAll(estado_Id)
+    .subscribe(response => {
+      this.cidades = response;
+      this.formGroup.controls.cidadeId.setValue(null);
+    },
+    error => {});
   }
 }
