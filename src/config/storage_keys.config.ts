@@ -1,3 +1,5 @@
+import { Carrinho } from './../models/carrinho';
 export const STORAGE_KEYS = {
-  localUser: "localUser"
+  localUser: "localUser",
+  carrinho: "carrinhoSistema"
 }

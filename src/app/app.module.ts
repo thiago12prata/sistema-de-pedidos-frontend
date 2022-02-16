@@ -1,3 +1,4 @@
+import { CarrinhoService } from './../services/domain/carrinho.service';
 import { ClienteService } from './../services/domain/cliente.service';
 import { AuthService } from './../services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -39,7 +40,8 @@ import { ProdutoService } from '../services/domain/produto.service';
     AuthService,
     StorageService,
     ClienteService,
-    ProdutoService
+    ProdutoService,
+    CarrinhoService
   ]
 })
 export class AppModule {}

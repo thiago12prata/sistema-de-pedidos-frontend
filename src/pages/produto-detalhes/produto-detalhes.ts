@@ -1,8 +1,10 @@
+import { ItemCarrinho } from './../../models/itemCarrinho';
 import { ProdutoService } from './../../services/domain/produto.service';
 import { ProdutoDTO } from './../../models/produto.dto';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { API_CONFIG } from '../../config/api.config';
+import { CarrinhoService } from '../../services/domain/carrinho.service';
 
 
 @IonicPage()
@@ -18,7 +20,8 @@ export class ProdutoDetalhesPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public produtoService: ProdutoService) {
+    public produtoService: ProdutoService,
+    public carrinhoService: CarrinhoService) {
   }
 
   ionViewDidLoad() {
@@ -37,5 +40,9 @@ export class ProdutoDetalhesPage {
       this.item.imageUrl = `${API_CONFIG.bucketBaseUrl}/prod${this.item.id}.jpg`;
     },
     error =>{});
+  }
+  adicionarAoCarrinho(produto: ProdutoDTO){
+    this.carrinhoService.adicionarProduto(produto);
+    this.navCtrl.setRoot('CarrinhoPage')
   }
 }
