@@ -1,3 +1,4 @@
+import { CarrinhoService } from './domain/carrinho.service';
 import { StorageService } from './storage.service';
 import { LocalUser } from './../models/local_user';
 
@@ -13,7 +14,10 @@ export class AuthService {
 
   jwHelper: JwtHelper = new JwtHelper();
 
-  constructor(public http: HttpClient, public storage: StorageService) {
+  constructor(
+    public http: HttpClient,
+    public storage: StorageService,
+    public carrinhoService: CarrinhoService) {
   }
 
   authenticate(creds : CredenciaisDTO) {
@@ -34,6 +38,7 @@ export class AuthService {
       email : this.jwHelper.decodeToken(tok).sub
     };
     this.storage.setLocalUser(user);
+    this.carrinhoService.criarOuLimparCarrinho();
   }
 
   refreshToken() {

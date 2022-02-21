@@ -6,6 +6,7 @@ import { Carrinho } from './../../models/carrinho';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { API_CONFIG } from '../../config/api.config';
+import { ProdutoDTO } from '../../models/produto.dto';
 
 @IonicPage()
 @Component({
@@ -37,5 +38,25 @@ export class CarrinhoPage {
       },
       error =>{});
     }
+  }
+
+  incrementarQtd( produto : ProdutoDTO){
+    this.itens = this.carrinhoService.incrementarQtd(produto).itens;
+  }
+
+  decrementarQtd( produto : ProdutoDTO){
+    this.itens = this.carrinhoService.decrementarQtd(produto).itens;
+  }
+
+  removerProduto( produto : ProdutoDTO){
+    this.itens = this.carrinhoService.removerProduto(produto).itens;
+  }
+
+  total() : number{
+    return this.carrinhoService.total();
+  }
+
+  continuarComprando(){
+    this.navCtrl.setRoot('CategoriasPage')
   }
 }
