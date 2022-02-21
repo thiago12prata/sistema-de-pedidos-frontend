@@ -11,6 +11,9 @@
   <ion-card>
     <img [src]="item?.imageUrl || 'assets/imgs/prod.jpg'"/>
     <ion-card-content>
+      <ion-fab top right edge>
+        <button navPush="CarrinhoPage" ion-fab mini><ion-icon name="cart"></ion-icon></button>
+      </ion-fab>
       <ion-card-title>
         {{item?.nome}}
         </ion-card-title>
