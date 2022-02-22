@@ -9,7 +9,7 @@
 
 <ion-content padding>
 
-  <form [formGroup]="formGroup" (ngSubmit)="nextPage(); $event.preventDefault()">
+  <form [formGroup]="formGroup" (ngSubmit)="nextPage()">
     <ion-list radio-group formControlName="@type">
       <ion-list-header>
         Tipo de pagamento
