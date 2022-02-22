@@ -59,4 +59,8 @@ export class CarrinhoPage {
   continuarComprando(){
     this.navCtrl.setRoot('CategoriasPage')
   }
+
+  finalizarPedido(){
+    this.navCtrl.push('EscolhaEndPage')
+  }
 }

@@ -1,0 +1,56 @@
+import { EnderecoDTO } from './../../models/endereco.dto';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+@IonicPage()
+@Component({
+  selector: 'page-escolha-end',
+  templateUrl: 'escolha-end.html',
+})
+export class EscolhaEndPage {
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams) {
+  }
+
+  itens: EnderecoDTO[];
+
+  ionViewDidLoad() {
+    this.itens = [
+      {
+        id: "1",
+        logradouro: "Rua Quinze de Novembro",
+        numero: "300",
+        complemento: "Apto 200",
+        bairro: "Santa Mônica",
+        cep: "48293822",
+        cidade: {
+          id: "1",
+          nome: "Uberlândia",
+          estado: {
+            id: "1",
+            nome: "Minas Gerais"
+          }
+        }
+      },
+      {
+        id: "2",
+        logradouro: "Rua Alexandre Toledo da Silva",
+        numero: "405",
+        complemento: null,
+        bairro: "Centro",
+        cep: "88933822",
+        cidade: {
+          id: "3",
+          nome: "São Paulo",
+          estado: {
+            id: "2",
+            nome: "São Paulo"
+          }
+        }
+      }
+    ];
+  }
+
+}
