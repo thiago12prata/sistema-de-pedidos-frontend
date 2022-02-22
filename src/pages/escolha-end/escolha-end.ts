@@ -1,3 +1,5 @@
+import { CarrinhoService } from './../../services/domain/carrinho.service';
+import { PedidoDTO } from './../../models/pedido.dto';
 import { EnderecoDTO } from './../../models/endereco.dto';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -15,10 +17,13 @@ export class EscolhaEndPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public storage: StorageService,
-    public clienteService: ClienteService) {
+    public clienteService: ClienteService,
+    public carrinhoService: CarrinhoService) {
   }
 
   itens: EnderecoDTO[];
+
+  pedido : PedidoDTO;
 
   ionViewDidLoad() {
     let localUser = this.storage.getLocalUser();
@@ -26,6 +31,15 @@ export class EscolhaEndPage {
       this.clienteService.findByEmail(localUser.email)
       .subscribe(response => {
         this.itens = response['enderecos'];
+
+        let carrinho = this.carrinhoService.getCarrinho();
+
+        this.pedido = {
+          cliente: {id: response['id']},
+          enderecoEntrega: null,
+          pagamento: null,
+          itens: carrinho.itens.map(x =>{ return {quantidade: x.quantidade , produto: {id: x.produto.id}}})
+        }
       },
       error => {
         if(error.status == 403){
@@ -38,4 +52,8 @@ export class EscolhaEndPage {
     }
   }
 
+  nextPage(item: EnderecoDTO){
+    this.pedido.enderecoEntrega = {id: item.id};
+    console.log(this.pedido)
+  }
 }
